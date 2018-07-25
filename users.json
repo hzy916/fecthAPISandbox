@@ -1,0 +1,36 @@
+{
+    "pets": [
+        {
+            "Id": 25,
+            "Name": "Ala",
+            "ImgUrl": "p25_1519998600.jpg",
+            "KindOwn": 0,
+            "isOnline": true,
+            "deviceId": null
+        },
+        {
+            "Id": 755,
+            "Name": "D1005",
+            "ImgUrl": "p755_1531313327.jpg",
+            "KindOwn": 1,
+            "isOnline": true,
+            "deviceId": 1005
+        }
+    ],
+    "petsDeleted": [
+        {
+            "Id": 93,
+            "Name": "Mars",
+            "ImgUrl": "p93_1498837265.jpg",
+            "isOnline": false,
+            "deviceId": 49
+        },
+        {
+            "Id": 96,
+            "Name": "Asp",
+            "ImgUrl": null,
+            "isOnline": false,
+            "deviceId": 246
+        }
+    ]
+}
