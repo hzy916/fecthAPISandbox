@@ -1,4 +1,4 @@
-[
+
   {
     "pet": {
         "battery": 100,
@@ -50,57 +50,4 @@
             "sats": "45"
         }
 	     ]
-  },
-  {
-    "pet": {
-        "battery": 50,
-        "frequency": 180,
-        "gpsStatus": -1,
-        "netSignal": 100,
-        "devTimeZone": 0,
-        "lbsTimestamp": 1531913140
-    },
-	"activity": [
-        {
-            "time": 1531105000,
-            "status": 0,
-            "duration": 566
-        },
-        {
-            "time": 1531355000,
-            "status": 1,
-            "duration": 34
-        }
-	],
-	"session": [
-        {
-            "Time": 1530304505,
-            "TimeOut": 1531395571,
-            "kTO": 2
-        },
-        {
-            "Time": 1531401402,
-            "TimeOut": 1531232385,
-            "kTO": 2
-        }
-    ],
-	"positions": [
-        {
-            "sessionId": 891477,
-            "lat": 51.874251666667,
-            "lon": -8.474893333333,
-            "time": 1531308211,
-            "battery": 10,
-            "sats": "11"
-        },
-        {
-            "sessionId": 891477,
-            "lat": 51.874251666667,
-            "lon": -8.474893333333,
-            "time": 1531308222,
-            "battery": 90,
-            "sats": "55"
-        }
-	     ]
   }
-]

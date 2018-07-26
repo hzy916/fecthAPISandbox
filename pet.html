@@ -7,8 +7,16 @@
   <title>Pet Activity Details</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
   <!--  jQuery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
 
   <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
   <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
@@ -16,6 +24,14 @@
   <!-- Bootstrap Date-Picker Plugin -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script>
+   $( function() {
+     $( "#tabs" ).tabs();
+   } );
+   </script>
 
 </head>
 <body>
@@ -44,52 +60,95 @@
           </div>
 
           <div class="form-group"> <!-- Submit button -->
-            <button class="btn btn-primary mt-3" name="submit" type="submit">Search</button>
+            <button class="btn btn-warning mt-3" name="submit" type="submit">Search</button>
           </div>
          </form>
          <!-- Form code ends -->
+         <table class="table table-striped">
+           <thead>
+             <tr>
+               <th scope="col">Battery</th>
+               <th scope="col">Net Signal</th>
+               <th scope="col">GPS Status</th>
+               <th scope="col">Is Online</th>
+             </tr>
+           </thead>
+
+           <tbody>
+             <tr>
+               <th scope="row">1</th>
+               <td>Mark</td>
+               <td>Otto</td>
+               <td>@mdo</td>
+             </tr>
+           </tbody>
+         </table>
+
       </div>
      </div>
     </div>
 
     <!--Details Table about battery, net signal, GPS status, online-->
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Battery</th>
-          <th scope="col">Net Signal</th>
-          <th scope="col">GPS Status</th>
-          <th scope="col">Is Online</th>
-        </tr>
-      </thead>
+    <div id="tabs">
+      <ul>
+        <li><a href="#tabs-1" onclick="getActivity()">Activity</a></li>
+        <li><a href="#tabs-2" onclick="getSession()">Session</a></li>
+        <li><a href="#tabs-3" onclick="getPosition()">Position</a></li>
+      </ul>
+      <div id="tabs-1">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Time</th>
+              <th scope="col">Status</th>
+              <th scope="col">Duration</th>
+            </tr>
+          </thead>
 
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-      </tbody>
-    </table>
+          <tbody id="activityRow">
+
+          </tbody>
+        </table>
+      </div>
+      <div id="tabs-2">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Time Start</th>
+              <th scope="col">Time output</th>
+              <th scope="col">KTO</th>
+            </tr>
+          </thead>
+
+          <tbody id="sessionRow">
+
+          </tbody>
+        </table>
+      </div>
+      <div id="tabs-3">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Session ID</th>
+              <th scope="col">LAT</th>
+              <th scope="col">LON</th>
+              <th scope="col">Time</th>
+              <th scope="col">Battery</th>
+              <th scope="col">Satellites</th>
+            </tr>
+          </thead>
+
+          <tbody id="positionRow">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
 
     <!-- Activity, Session, Position Toggle table-->
-    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
-      </li>
-    </ul>
-    <div class="tab-content" id="pills-tabContent">
-      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">.Home</div>
-      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">..Profile.</div>
-      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">.Contact..</div>
-    </div>
 
   </div>
 
@@ -110,6 +169,87 @@
         date_end.datepicker(options);
       })
       /* end script for date picker*/
+
+      /*toggle tab for tables*/
+      function getActivity(){
+        fetch('pets.json')
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          //get pet's activity details
+          let petActivity = data.activity;
+
+          let output1 = '';
+          let output2 = '<h2 class="mb-4">Deleted Pets</h2>';
+
+          petActivity.forEach((petactivity) =>{
+             const { time, status, duration} = petactivity
+                 output1 +=
+                 `<tr>
+                       <th scope="row">${time}</th>
+                       <td>${status}</td>
+                       <td>${duration}</td>
+                     </tr>`;
+                 document.getElementById('activityRow').innerHTML = output1;
+          });
+
+        })
+      }
+
+      /**Get Session data**/
+      function getSession(){
+        fetch('pets.json')
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          //get pet's session details
+          let petSession = data.session;
+
+          let output2 = '';
+
+
+          petSession.forEach((petsession) =>{
+             const { Time, TimeOut, kTO} = petsession
+                 output2 +=
+                 `<tr>
+                       <th scope="row">${Time}</th>
+                       <td>${TimeOut}</td>
+                       <td>${kTO}</td>
+                     </tr>`;
+                 document.getElementById('sessionRow').innerHTML = output2;
+          });
+        })
+      }
+
+      /**Get Session data**/
+      function getPosition(){
+        fetch('pets.json')
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          //get pet's session details
+          let petPosition = data.positions;
+
+          let output3 = '';
+
+
+          petPosition.forEach((petposition) =>{
+             const { sessionId, lat, lon,time,battery,sats} = petposition
+                 output3 +=
+                 `<tr>
+                       <th scope="row">${sessionId}</th>
+                       <td>${lat}</td>
+                       <td>${lon}</td>
+                       <td>${time}</td>
+                       <td>${battery}</td>
+                       <td>${sats}</td>
+                     </tr>`;
+                 document.getElementById('positionRow').innerHTML = output3;
+          });
+        })
+      }
+
+
   </script>
 
 
